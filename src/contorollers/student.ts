@@ -128,8 +128,13 @@ checkSchema(SCHEMA), async (request: express.Request, response: express.Response
 studentRouter.get('/api/students', async (request, response) => {
     const students = await prisma.student.findMany();
 
-    response.status(200).send({ students });
+    response.status(200).send(students);
 });
 
+studentRouter.get('/api/get-student', async (request, response) => {
+    const students = await prisma.student.findMany()
+
+    response.status(200).send(students[students.length - 1]);
+});
 
 export default studentRouter;
